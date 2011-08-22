@@ -14,7 +14,7 @@ def add_tweet(data):
 	return tweet
 	
 def add_term(query_string):
-	term = Term.query.filter_by(text=query_string)
+	term = Term.query.filter_by(text=query_string).first()
 	if term is None:
 		term = Term(query_string)
 		db.session.add(term)
