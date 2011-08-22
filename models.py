@@ -12,7 +12,14 @@ def add_tweet(data):
 		db.session.add(tweet)
 		db.session.commit()
 	return tweet
-
+	
+def add_term(query_string):
+	term = Term.query.filter_by(text=query_string)
+	if term is None:
+		term = Term(query_string)
+		db.session.add(term)
+		db.session.commit()
+	return term
 
 tweets_to_terms = db.Table('tweets_to_queries',
 	db.Column('tweet_id', db.Integer, db.ForeignKey('tweet.id')),
