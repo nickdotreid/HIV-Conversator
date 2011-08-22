@@ -1,0 +1,1 @@
+db_uri = 'sqlite:////Users/nickreid/Documents/sfhiv/TwitterLine/twitterHIV/test.db'
