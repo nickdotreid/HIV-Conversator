@@ -1,4 +1,18 @@
 from hivapp import db
+import time
+from datetime import datetime
+
+def add_tweet(data):
+	tweet = Tweet.query.filter_by(tweet_id=data['id_str']).first()
+	if tweet is None and 'created_at' in data:
+		d = time.strptime(data['created_at'][0:len(data['created_at'])-6],'%a, %d %b %Y %H:%M:%S')
+		data['created_at'] = datetime.fromtimestamp(time.mktime(d))
+		
+		tweet = Tweet(data['id_str'],data['from_user'],data['text'],data['created_at'])
+		db.session.add(tweet)
+		db.session.commit()
+	return tweet
+
 
 tweets_to_terms = db.Table('tweets_to_queries',
 	db.Column('tweet_id', db.Integer, db.ForeignKey('tweet.id')),
