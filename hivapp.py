@@ -27,7 +27,6 @@ def get_tweets():
 		if len(month)<2:
 			month = "0"+month
 		date_string = request.form['day']+"/"+month+"/"+request.form['year']
-		print date_string
 		tweets = Tweet.query.filter("strftime('%d/%m/%Y',posted) = :date").params(date=date_string).all()
 		total = len(tweets)
 	return jsonify(total = total)
