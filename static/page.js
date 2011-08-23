@@ -25,7 +25,7 @@ $(document).ready(function(){
 		$("#templates .bar").clone().data("total",0).data("date",event.date).addClass("loading").appendTo($("#graph"));
 	}).bind("draw",function(event){
 		graph = $(this)
-		$(".bar .canvas",graph).remove()
+		$(".bar .canvas,.bar .total",graph).remove()
 		bars = $(".bar",graph)
 		max = 0;
 		for(var i=0;i<bars.length;i++){
@@ -38,11 +38,17 @@ $(document).ready(function(){
 			for(var i=0;i<bars.length;i++){
 				bar = $(bars[i])
 				bar.prepend("<div class='canvas'></div>")
+				bar.append('<div class="total">'+bar.data("total")+'</div>');
 				height = (bar.data('total')/max)*graph.height()
 				$('.canvas',bar).height(height).css("top",(graph.height()-height)+"px");
 			}
 		}
+	}).delegate(".bar",'mouseover',function(){
+		$(this).addClass("hover");
+	}).delegate(".bar",'mouseout',function(){
+		$(this).removeClass("hover")
 	});
+	
 	date = new Date()
 	day_in_milliseconds = 86400000
 	limit = new Date(date.getTime()-(day_in_milliseconds*20))

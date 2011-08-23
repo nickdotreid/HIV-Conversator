@@ -20,6 +20,10 @@
 	display:block;
 	margin:0px 3px;
 }
+#graph .bar .total{
+	margin:0px 3px;
+	font-style:italic;
+}
 #graph .bar .canvas{
 	width:100%;
 	background-color:#b3d9fd;
