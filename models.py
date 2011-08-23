@@ -9,6 +9,11 @@ def add_tweet(data):
 		data['created_at'] = datetime.fromtimestamp(time.mktime(d))
 		
 		tweet = Tweet(data['id_str'],data['from_user'],data['text'],data['created_at'])
+		if 'location' in data and data['location'] is not None:
+			tweet.location = data['location']
+		if data['geo'] is not None and data['geo']['coordinates'] is not None and len(data['geo']['coordinates'])>1:
+			tweet.lat = data['geo']['coordinates'][0]
+			tweet.lng = data['geo']['coordinates'][1]
 		db.session.add(tweet)
 		db.session.commit()
 	return tweet
@@ -31,7 +36,11 @@ class Tweet(db.Model):
 	tweet_id = db.Column(db.String(200))
 	user = db.Column(db.String(25))
 	text = db.Column(db.String(200))
+	location = db.Column(db.String(255))
+	lat = db.Column(db.Float,nullable=True)
+	lng = db.Column(db.Float,nullable=True)
 	posted = db.Column(db.DateTime)
+	hidden = db.Column(db.Boolean)
 	terms = db.relationship('Term' ,secondary=tweets_to_terms, backref=db.backref('source',lazy='dynamic'))
 	
 	def __init__(self, tweet_id, user, text, posted):
@@ -39,6 +48,7 @@ class Tweet(db.Model):
 		self.user = user
 		self.text = text
 		self.posted = posted
+		self.hidden = False
 	
 class Term(db.Model):
 	id = db.Column(db.Integer,primary_key=True)
