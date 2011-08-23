@@ -45,7 +45,7 @@ $(document).ready(function(){
 	});
 	date = new Date()
 	day_in_milliseconds = 86400000
-	limit = new Date(date.getTime()-(day_in_milliseconds*40))
+	limit = new Date(date.getTime()-(day_in_milliseconds*20))
 	while(date>=limit){
 		$("#graph").trigger({
 			type:'add',
