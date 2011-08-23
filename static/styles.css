@@ -9,6 +9,8 @@
 
 #graph .bar{
 	height:100%;
+	width:50px;
+	border-right:#777 1px solid;
 	display:block;
 	float:left;
 	overflow:hidden;
@@ -20,9 +22,12 @@
 }
 #graph .bar .canvas{
 	width:100%;
-	background-color:#FCC;
+	background-color:#b3d9fd;
 	position:absolute;
 	top:0px;
 	left:0px;
 	z-index:-5;
+}
+#graph .bar.hover .canvas{
+	background-color:#5fabfb;
 }
