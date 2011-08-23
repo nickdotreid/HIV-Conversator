@@ -1,6 +1,8 @@
 from flask import Flask, request, render_template, jsonify
 from flaskext.sqlalchemy import SQLAlchemy
 import re
+import time
+from datetime import datetime
 
 from twython import Twython
 
@@ -18,7 +20,12 @@ def index():
 	
 @app.route('/tweets',methods=['GET','POST'])
 def get_tweets():
+	tweets = []
 	total = 0
-	if request.method == "POST" and 'region' in request.form and 'types' in request.form:
-		total = 10
+	if request.method == "POST" and 'day' in request.form and 'month'in request.form and 'year' in request.form:
+		if int(request.form['month'])<10:
+			month = "0"+request.form['month']
+		date_string = request.form['day']+"/"+month+"/"+request.form['year']
+		tweets = Tweet.query.filter("strftime('%d/%m/%Y',posted) = :date").params(date=date_string).all()
+		total = len(tweets)
 	return jsonify(total = total)

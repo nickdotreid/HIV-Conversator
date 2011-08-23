@@ -1,3 +1,28 @@
 #templates{
 	display:none;
 }
+
+#graph{
+	height:400px;
+	overflow:hidden;
+}
+
+#graph .bar{
+	height:100%;
+	display:block;
+	float:left;
+	overflow:hidden;
+	position:relative;
+}
+#graph .bar .date{
+	display:block;
+	margin:0px 3px;
+}
+#graph .bar .canvas{
+	width:100%;
+	background-color:#FCC;
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index:-5;
+}
