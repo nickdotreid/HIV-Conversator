@@ -1,0 +1,31 @@
+<html>
+<head>
+	<title>HIV Conversator</title>
+	<link rel="stylesheet" type="text/css" href="/static/styles.css" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+	
+	<script type="text/javascript" src="/static/page.js"></script>
+</head>
+<body>
+	<div id="head" class="wrapper">
+		<h1>HIV Conversator</h1>
+	</div>
+	<div id="content" class="wrapper">
+		{% block content %}
+		<p>Default Content</p>
+		{% endblock %}
+	</div>
+	<div id="foot" class="wrapper">
+		<p>A small graphing app by nickreid</p>
+		<p>Data is pulled from twitter</p>
+	</div>
+	<div id="templates">
+		{% block templates %}
+		
+		{% endblock %}
+	</div>
+</body>
+</html>
