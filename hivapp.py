@@ -23,6 +23,7 @@ def get_tweets():
 	tweets = []
 	total = 0
 	if request.method == "POST" and 'day' in request.form and 'month'in request.form and 'year' in request.form:
+		month = 10
 		if int(request.form['month'])<10:
 			month = "0"+request.form['month']
 		date_string = request.form['day']+"/"+month+"/"+request.form['year']
